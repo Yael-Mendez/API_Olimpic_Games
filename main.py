@@ -63,8 +63,8 @@ def medal_country(pais:str):
 # %%
 @app.get("/medal_year/{year}")
 def medal_year(year:str):
-    filtro = df[df["Year"]==year]
-    medallas = filtro["Medal"].value_counts()
+    filtro=df[df["Year"]==year]
+    medallas=filtro["Medal"].value_counts()
     dic={}
     for i in range(len(medallas)):
         dic[medallas.index[i]]=int(medallas.values[i])
