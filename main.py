@@ -27,7 +27,7 @@ df=pd.read_parquet("Data/Dataset.parquet")
 # %%
 @app.get("/")
 def index():
-    return{"API":"Online"}
+    return{"api"/"online"}
 
 # %% [markdown]
 # #### Funcion Medals
@@ -41,6 +41,9 @@ def medals():
         dic[medal.index[i]] = int(medal.values[i])
     return dic
 
+# %%
+medals()
+
 # %% [markdown]
 # #### Funcion medal_country()
 
@@ -51,13 +54,13 @@ def medal_country(pais:str):
     medallas=filtro["Medal"].value_counts()
     dic={}
     if filtro.empty:
-        return{'Error':'El pais no existe o esta mal escrito'}
+        return{'Error':f'El pais {pais} no existe o esta mal escrito'}
     for i in range(len(medallas)):
         dic[medallas.index[i]]=int(medallas.values[i])
     return dic
 
 # %%
-#medal_country('Mexico')
+medal_country('mexico')
 
 # %% [markdown]
 # #### Funcion medal_year()
@@ -69,13 +72,13 @@ def medal_year(year:int):
     medallas=filtro["Medal"].value_counts()
     dic={}
     if filtro.empty:
-        return{'Error':'No hubo juegos olimpicos en ese año'}
+        return{'Error':f'No hubo juegos olimpicos en el año {year}'}
     for i in range(len(medallas)):
         dic[medallas.index[i]]=int(medallas.values[i])
     return dic
 
 # %%
-#medal_year(2012)
+medal_year(2000)
 
 # %% [markdown]
 # #### Funcion ATLETAS(Nombre)
@@ -89,7 +92,7 @@ def atletas(nombre:str):
         return{'Error':'Revise los datos ingresados'}
     dic['nombre']=nombre
     dic['Sexo']=filtro['Sex'].values[0]
-    dic['edad']=int(filtro['Age'].values[0])
+    dic['edad']=list(filtro['Age'].value_counts().index)
     dic['pais']=list(filtro['Team'].value_counts().index)
     dic['juegos']=list(filtro['Games'].value_counts().index)
     dic['evento']=list(filtro['Event'].value_counts().index)
@@ -101,6 +104,6 @@ def atletas(nombre:str):
 
 
 # %%
-#atletas('Heikki Ilmari Savolainen')
+atletas('Heikki Ilmari Savolainen')
 
 
