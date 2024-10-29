@@ -62,7 +62,7 @@ def medal_country(pais:str):
 
 # %%
 @app.get("/medal_year/{year}")
-def medal_year(year:str):
+def medal_year(year:int):
     filtro=df[df["Year"]==year]
     medallas=filtro["Medal"].value_counts()
     dic={}
